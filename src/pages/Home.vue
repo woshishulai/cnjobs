@@ -52,20 +52,12 @@
     </div>
 
     <el-row class="about-us" style="">
-        <el-col :xs="0" :md="8"></el-col>
+        <el-col :xs="0" :md="7"></el-col>
         <el-col :xs="24" :md="14">
             <div style="padding: 40px">
                 <h1 style="color: #2b3b61; font-size: 32px">About Us</h1>
-                <p>
+                <p style="line-height: 22px">
                     {{ about_info.content }}
-                    <!--          We are a service organization dedicated to foreign personnel, and our management team-->
-                    <!--          consists of educators who have been deeply involved ir the international education field-->
-                    <!--          for many years. We are commited to providing one-on-one talent consultants for schools and-->
-                    <!--          enterprises to gai a deeper understandina of the school's culture and iob reauirements,-->
-                    <!--          This will enable us to stnictly monitor and closely communicate with schools and-->
-                    <!--          enterprises during the recommendation and intenview of candidates, teacher onboarding, and-->
-                    <!--          onboarding foow-up stages. Our service plat form includes the website www.cnjobs.vip and-->
-                    <!--          the WeChat public platform Information for Experiment. 276. nulated-->
                 </p>
                 <el-row :gutter="20" class="number-container" style="color: #ff9300">
                     <el-col :xs="24" :sm="12" :md="6">
@@ -173,76 +165,24 @@
         <el-row class="choose-us" style="">
             <el-col :span="20" :offset="2">
                 <div class="choose-us-title">
-                    <h1>Why Choose Us</h1>
-                    <p>
-                        We provide you with a comprehensive one-stop service to help you find
-                        satisfactory jobs or talents
-                    </p>
+                    <h1 v-html="xuanze?.main?.title"></h1>
+                    <p v-html="xuanze?.main?.stitle"></p>
                 </div>
                 <el-row :gutter="40">
-                    <el-col :xs="24" :sm="12" :md="8">
+                    <el-col
+                        :xs="24"
+                        :sm="12"
+                        :md="8"
+                        v-for="(item, index) in xuanze?.childs"
+                        :key="item.id"
+                    >
                         <div class="choose-us-card">
                             <div>
                                 <img src="/images/icon-visa.png" />
                             </div>
                             <div>
-                                <h2>Work visa</h2>
-                                <p>The program is simple, convenient, and flexible</p>
-                            </div>
-                        </div>
-                    </el-col>
-                    <el-col :xs="24" :sm="12" :md="8">
-                        <div class="choose-us-card">
-                            <div>
-                                <img src="/images/icon-extension.png" />
-                            </div>
-                            <div>
-                                <h2>Visa Extension</h2>
-                                <p>Years of visa experience in various countries</p>
-                            </div>
-                        </div>
-                    </el-col>
-                    <el-col :xs="24" :sm="12" :md="8">
-                        <div class="choose-us-card">
-                            <div>
-                                <img src="/images/icon-visa-cancel.png" />
-                            </div>
-                            <div>
-                                <h2>Visa cancellation</h2>
-                                <p>Solve various difficulties and logout</p>
-                            </div>
-                        </div>
-                    </el-col>
-                    <el-col :xs="24" :sm="12" :md="8">
-                        <div class="choose-us-card">
-                            <div>
-                                <img src="/images/icon-visa-refused.png" />
-                            </div>
-                            <div>
-                                <h2>No criminal record agency</h2>
-                                <p>The program is simple, convenient, and flexible</p>
-                            </div>
-                        </div>
-                    </el-col>
-                    <el-col :xs="24" :sm="12" :md="8">
-                        <div class="choose-us-card">
-                            <div>
-                                <img src="/images/icon-house.png" />
-                            </div>
-                            <div>
-                                <h2>Life care services</h2>
-                                <p>Tailored to save time and effort</p>
-                            </div>
-                        </div>
-                    </el-col>
-                    <el-col :xs="24" :sm="12" :md="8">
-                        <div class="choose-us-card">
-                            <div>
-                                <img src="/images/icon-person.png" />
-                            </div>
-                            <div>
-                                <h2>Personnel management services</h2>
-                                <p>Assist managers in scientific management</p>
+                                <h2 v-html="item?.title"></h2>
+                                <p v-html="item?.stitle"></p>
                             </div>
                         </div>
                     </el-col>
@@ -254,15 +194,12 @@
     <el-row class="steps" style="">
         <el-col :span="20" :offset="2">
             <div class="steps-title">
-                <h1>How it Works</h1>
-                <p>
-                    Top TutorJob offers international educators with perfessional job placement
-                    service.
-                </p>
+                <h1 v-html="howWork?.main?.title"></h1>
+                <p v-html="howWork?.main?.stitle"></p>
             </div>
-            <el-row :gutter="20" class="steps-box">
+            <el-row class="steps-box">
                 <el-col :xs="24" :sm="16" :md="16">
-                    <timeline />
+                    <timeline :list="howWork?.childs" />
                 </el-col>
                 <el-col
                     :xs="24"
@@ -284,69 +221,57 @@
     <el-row class="feedback" style="">
         <el-col :span="20" :offset="2">
             <div class="feedback-title">
-                <h1>Teacher's Feedback</h1>
-                <p>
-                    TopTutorJob offers international educators with perfessional job placement
-                    service.
-                </p>
+                <h1 v-html="feedback?.main?.title"></h1>
+                <p v-html="feedback?.main?.stitle"></p>
             </div>
             <el-row :gutter="20">
-                <el-col :xs="24" :sm="12" :md="8">
+                <el-carousel :interval="4000" height="atuo">
+                    <el-col
+                        :xs="24"
+                        :sm="12"
+                        :md="8"
+                        v-for="(item, index) in feedback?.childs"
+                        :key="index"
+                        class="feedback-item"
+                    >
+                        <el-carousel-item class="feedback-item">
+                            <div>
+                                <div class="feedback-item-title">
+                                    <span></span>
+                                    <span>{{ item?.title }}</span>
+                                    <span></span>
+                                </div>
+                                <div class="feedback-item-desc">
+                                    <p>
+                                        {{ item?.stitle }}
+                                    </p>
+                                </div>
+                            </div>
+                        </el-carousel-item>
+                    </el-col>
                     <div class="feedback-item">
                         <div class="feedback-item-title">
                             <span></span>
-                            <span style="">Sandra | USA</span>
+                            <span>{{ item?.title }}</span>
                             <span></span>
                         </div>
                         <div class="feedback-item-desc">
                             <p>
-                                TopTutorJob is a great recruitment agency. They are reliable and
-                                they are with you every step of the way. They assist with the
-                                process from day one and give you support before and after your
-                                interview. I would highly recommend them to just about anyone. They
-                                were able to match me with a good job and the interview was setup
-                                and within a week I had secured an offer from a company. They are
-                                very reliable and
+                                {{ item?.stitle }}
                             </p>
                         </div>
                     </div>
-                </el-col>
-                <el-col :xs="24" :sm="12" :md="8">
+                </el-carousel>
+                <el-col :xs="24" :sm="12" :md="8" v-for="(item, index) in feedback?.childs">
                     <div class="feedback-item">
                         <div class="feedback-item-title">
                             <span></span>
-                            <span>Ancel | USA</span>
+                            <span>{{ item?.title }}</span>
                             <span></span>
                         </div>
                         <div class="feedback-item-desc">
                             <p>
-                                Zoe has been absolutely fantastic. She not only got me the exact job
-                                I was looking for, but has followed up with me to make sure I'm
-                                still being treated according to the arrangements she worked out
-                                with the employer. To be honest, I was quite surprised by the follow
-                                ups. I've worked with many recruiters over the years and this is the
-                                only time I've experienced such professionalism and care. I would
-                                highly recommend...
-                            </p>
-                        </div>
-                    </div>
-                </el-col>
-                <el-col :xs="24" :sm="12" :md="8">
-                    <div class="feedback-item">
-                        <div class="feedback-item-title">
-                            <span></span>
-                            <span>Lucy | UK</span>
-                            <span></span>
-                        </div>
-                        <div class="feedback-item-desc">
-                            <p>
-                                TopTutorJob is a great recruitment agency. They are reliable and
-                                they are with you every step of the way. They assist with the
-                                process from day one and give you support before and after your
-                                interview. I would highly recommend them to just about anyone. They
-                                were able to match me with a good job and the interview was setup
-                                and within a week I had secured an offer from a company. They are
-                                very reliable and ...
+                                {{ item?.stitle }}
                             </p>
                         </div>
                     </div>
@@ -379,54 +304,50 @@
                 >
             </div>
             <el-row :gutter="40">
-                <el-col v-for="(news, index) in newsList" :key="index" :xs="24" :sm="12">
+                <el-col
+                    v-for="(news, index) in newsList.slice(0, 2)"
+                    :key="index"
+                    :xs="24"
+                    :sm="12"
+                >
                     <el-card class="card-news">
                         <div class="news-cover">
-                            <img @mouseenter="setZoomClass" :src="news.cover" />
+                            <img @mouseenter="setZoomClass" :src="news?.cover" />
                         </div>
                         <div class="news-title">
-                            {{ news.title }}
-                            <!--              What preparations do foreigners need to make before entering the country?-->
+                            {{ news?.title }}
                         </div>
-                        <div class="news-date">{{ news.date }}</div>
-                        <!--            <div class="news-date">15 March 2023</div>-->
-                        <div class="news-summary">
-                            {{ news.describe }}
-                            <!--              Foreign teachers should strictly demand themselves in their daily teaching process. We-->
-                            <!--              visited several well-known international schools and reviewed the high-risk behaviors-->
-                            <!--              that may lead to the dismissal of foreign teachers. I hope it can be helpful to-->
-                            <!--              foreign teachers working in China.-->
+                        <div style="display: flex; align-items: center; gap: 10px; color: #808080">
+                            <img style="width: 22px" src="@/images/日历.png" alt="" />
+                            <p>{{ news?.add_time }}</p>
+                        </div>
+                        <div class="news-date">{{ news?.date }}</div>
+
+                        <div
+                            class="news-summary"
+                            style="
+                                font-family: Microsoft YaHei;
+                                font-weight: 400;
+                                font-size: 12px;
+                                color: #4e5976;
+                                line-height: 24px;
+                            "
+                        >
+                            {{ news?.describe }}
                         </div>
                         <div class="news-link">
-                            <a href="/index.html#/news">Read More</a>
+                            <a href="/index.html#/news" class="aaaa">Read More</a>
                             <el-icon><Right /></el-icon>
                         </div>
                     </el-card>
                 </el-col>
-                <!--        <el-col :xs="24" :sm="12">-->
-                <!--          <el-card class="card-news">-->
-                <!--            <div class="news-cover">-->
-                <!--              <img src="/images/news2.jpg" @mouseenter="setZoomClass" />-->
-                <!--            </div>-->
-                <!--            <div class="news-title">-->
-                <!--              Attention! High risk behaviors that may lead to the dismissal of foreign teachers-->
-                <!--            </div>-->
-                <!--            <div class="news-date">10 April 2023</div>-->
-                <!--            <div class="news-summary">-->
-                <!--              Foreign teachers should strictly demand themselves in their daily teaching process. We-->
-                <!--              visited several well-known international schools and reviewed the high-risk behaviors-->
-                <!--              that may lead to the dismissal of foreign teachers. I hope it can be helpful to-->
-                <!--              foreign teachers working in China.-->
-                <!--            </div>-->
-                <!--            <div class="news-link">-->
-                <!--              <a href="#">Read More</a>-->
-                <!--              <el-icon><Right /></el-icon>-->
-                <!--            </div>-->
-                <!--          </el-card>-->
-                <!--        </el-col>-->
             </el-row>
             <div class="news-jump">
-                <el-button @click="goToPage" round class="btn-outline-yellow" style="width: 130px"
+                <el-button
+                    @click="goToPage"
+                    round
+                    class="btn-outline-yellow"
+                    style="width: 152px; height: 43px; background: #e9e9e9; border-radius: 22px"
                     >See more</el-button
                 >
             </div>
@@ -451,7 +372,6 @@
 
 <script>
 import Timeline from '@/components/Timeline.vue'
-import axios from 'axios'
 import QuickApply from './jobs/QuickApply.vue'
 import { getNewsListApi, getHomeListApi } from '../request/api.js'
 // import Breadcrumb from "../components/Breadcrumb";
@@ -475,7 +395,10 @@ export default {
             about_info: [],
             school_partners: [],
             applyFormVisible: false,
-            newsList: []
+            newsList: [],
+            xuanze: {},
+            howWork: {},
+            feedback: {}
         }
     },
     props: {},
@@ -554,7 +477,6 @@ export default {
         gotourl() {
             let keywords = this.searchForm.keywords
             let location = this.searchForm.location
-
             this.$router.push({
                 name: 'Schools',
                 query: { keywords: keywords, location: location }
@@ -590,8 +512,8 @@ export default {
                     ntype: this.isActive,
                     snum: 2
                 }
-                const response = await getNewsListApi()
-                this.newsList = response.data.data
+                const response = await getNewsListApi(formData)
+                this.newsList = response.data
             } catch (error) {
                 // 处理请求错误
                 // console.error(error);
@@ -609,6 +531,7 @@ export default {
                 //   formData.location=loc;
                 // }
                 const response = await getHomeListApi()
+                console.log(response)
                 // 将返回的数据赋值给 data 属性
                 // this.title = response.data.title;
                 // alert(JSON.stringify(response.data))
@@ -618,6 +541,9 @@ export default {
                 this.school_locations = response.location
                 this.about_info = response.about_info
                 this.school_partners = response.school_partners
+                this.xuanze = response.cnjob_whychaosemy
+                this.howWork = response.cnjob_howitworks
+                this.feedback = response.cnjob_teachersfeedback
                 // this.description = response.data.description;
             } catch (error) {
                 // 处理请求错误
@@ -697,6 +623,9 @@ export default {
         padding: 0 20px;
     }
 }
+.aaaa {
+    color: #1f2f57;
+}
 
 .big-number {
     font-size: 50px;
@@ -724,6 +653,9 @@ export default {
     padding: 40px 0;
     background-image: url('/images/bg-partners.jpg');
     position: relative;
+}
+.partners-title {
+    margin-bottom: 46px;
 }
 .partners-title h1 {
     text-align: center;
@@ -807,11 +739,14 @@ export default {
 
 .choose-us {
     color: #ffffff;
-    padding: 70px 0;
+    padding: 40px 0 70px;
     background-image: url('/images/bg-choose-us.jpg');
     background-position: center center;
     background-repeat: no-repeat;
     background-size: cover;
+}
+.choose-us-title {
+    margin-bottom: 54px;
 }
 .choose-us-title h1 {
     text-align: center;
@@ -855,6 +790,7 @@ export default {
     background-repeat: no-repeat;
     background-size: cover;
     padding-bottom: 40px;
+    padding-top: 40px;
 }
 
 .steps-title {
@@ -871,7 +807,8 @@ export default {
 }
 
 .steps-box {
-    margin: 50px 0;
+    max-width: 1240px;
+    margin: 50px auto;
 }
 .steps-timeline {
 }
@@ -921,6 +858,10 @@ export default {
     background-size: cover;
     color: #ffffff;
     padding-bottom: 40px;
+    padding-top: 40px;
+}
+.feedback-title {
+    margin-bottom: 54px;
 }
 .feedback-title h1 {
     text-align: center;
@@ -964,7 +905,7 @@ export default {
         }
     }
     .feedback-item-desc {
-        padding: 20px;
+        padding: 40px 30px;
         border: solid 1px #ffffff;
         border-top: none;
         border-radius: 5px;
@@ -977,6 +918,7 @@ export default {
         overflow: hidden;
         display: -webkit-box;
         -webkit-line-clamp: 7;
+        line-height: 30px;
         -webkit-box-orient: vertical;
     }
 }
@@ -1023,7 +965,8 @@ export default {
 .news-summary {
     color: #4e5976;
     font-size: 12px;
-    margin: 10px 0;
+    height: 72px;
+    margin: 10px 0 20px;
     word-break: break-all;
     overflow: hidden;
     display: -webkit-box;

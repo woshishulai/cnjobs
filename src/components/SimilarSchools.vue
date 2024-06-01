@@ -1,49 +1,89 @@
 <template>
     <div class="">
-        <div>
-            <label style="padding-right: 10px; font-size: 22px">
+        <div style="margin-bottom: 42px">
+            <label
+                style="
+                    height: 16px;
+                    font-family: Arial;
+                    font-weight: bold;
+                    font-size: 22px;
+                    color: #000000;
+                    line-height: 28px;
+                "
+            >
                 Similar Schools</label
             >
             <el-icon><CaretBottom /></el-icon>
         </div>
         <el-row :gutter="20">
-            <el-col
-                :xs="14"
-                :sm="12"
-                :md="8"
-                v-for="(school, index) in schools"
-                :key="index"
-            >
+            <el-col :xs="14" :sm="12" :md="8" v-for="(school, index) in schools" :key="index">
                 <div class="card-noborder school-card">
-                    <div class="school-title">
+                    <div class="school-title" style="display: flex; align-items: center">
                         <img
                             src="/images/school_logo.jpeg"
-                            style="
-                                width: auto;
-                                height: 40px;
-                                vertical-align: middle;
-                            "
+                            style="width: auto; height: 50px; vertical-align: middle"
                         />
                         <div
                             style="
                                 display: inline-block;
                                 vertical-align: middle;
                                 padding-left: 20px;
+                                font-family: Arial;
+                                font-weight: 400;
+                                font-size: 16px;
+                                color: #474747;
                             "
                         >
                             <label style="vertical-align: middle">
                                 {{ school.name }}
                             </label>
-                            <div>
+                            <div style="margin-top: 5px">
                                 {{ school.province }}
                             </div>
                         </div>
                     </div>
                     <div class="job-detail">
-                        <div class="job-name">{{ school.job.name }}</div>
-                        <div>{{ school.job.position }}  position available</div>
-                        <div>{{ school.job.salary }}</div>
-                        <div>{{ school.job.start_date }}</div>
+                        <div
+                            class="job-name"
+                            style="
+                                font-family: Arial;
+                                font-weight: 400;
+                                font-size: 16px;
+                                color: #1f2f57;
+                            "
+                        >
+                            {{ school.job.name }}
+                        </div>
+                        <div
+                            style="
+                                font-family: Arial;
+                                font-weight: 400;
+                                font-size: 16px;
+                                color: #474747;
+                            "
+                        >
+                            {{ school.job.position }} position available
+                        </div>
+                        <div
+                            style="
+                                font-family: Arial;
+                                font-weight: 400;
+                                font-size: 16px;
+                                color: #474747;
+                            "
+                        >
+                            {{ school.job.salary }}
+                        </div>
+                        <div
+                            style="
+                                font-family: Arial;
+                                font-weight: 400;
+                                font-size: 16px;
+                                color: #474747;
+                            "
+                        >
+                            {{ school.job.start_date }}
+                        </div>
                     </div>
                 </div>
             </el-col>
@@ -53,16 +93,16 @@
 
 <script>
 export default {
-    name: "SimilarSchools",
+    name: 'SimilarSchools',
     props: {
-        schools: [Array],
+        schools: [Array]
     },
     created() {},
     data() {
-        return {};
+        return {}
     },
-    methods: {},
-};
+    methods: {}
+}
 </script>
 
 <style lang="scss" scoped>
@@ -76,7 +116,7 @@ export default {
     .job-detail {
         line-height: 30px;
         div {
-          padding-left: 10px;
+            padding-left: 10px;
         }
         .job-name {
             padding: 10px;

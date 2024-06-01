@@ -6,7 +6,7 @@ const instance = axios.create({
     baseURL: '/api',
     //生产
     // baseURL: 'http://cnjob.sc798.com',
-    timeout: 5000
+    timeout: 100000000000000
 })
 instance.interceptors.request.use(
     (config) => {

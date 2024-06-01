@@ -8,26 +8,23 @@
             </div>
         </div>
         <div>
-            <el-form :model="form" ref="form" label-position="top">
-                <el-form-item label="First Name">
-                    <el-input size="large" v-model="form.name"></el-input>
+            <el-form :model="form" ref="form" label-position="top" :rules="rules">
+                <el-form-item label="First Name" prop="name">
+                    <el-input size="large" style="height: 49px" v-model="form.name"></el-input>
                 </el-form-item>
-                <el-form-item label="Last Name">
-                    <el-input size="large" v-model="form.lastname"></el-input>
+                <el-form-item label="Last Name" prop="lastname">
+                    <el-input size="large" style="height: 49px" v-model="form.lastname"></el-input>
                 </el-form-item>
-                <el-form-item label="Email">
-                    <el-input size="large" v-model="form.email"></el-input>
+                <el-form-item label="Email" prop="email">
+                    <el-input size="large" style="height: 49px" v-model="form.email"></el-input>
                 </el-form-item>
                 <el-form-item label="Resume" class="resume">
                     <el-upload
-                        :action="''"
-                        :on-success="handleSuccess"
-                        :on-error="handleError"
-                        :before-upload="beforeUpload"
-                        :http-request="uploadFile"
-                        :multiple="false"
+                        ref="upload"
+                        class="upload-demo"
                         :limit="1"
-                        :show-file-list="false"
+                        @change="handleFileChange"
+                        :auto-upload="false"
                     >
                         <span @click="selectFile" class="btn-upload" style="">
                             <img src="@/images/icon-upload.png" />
@@ -49,8 +46,8 @@
                     <el-button
                         @click="submitForm('form')"
                         size="large"
+                        style="height: 49px; width: 100%"
                         class="btn-yellow"
-                        style="width: 100%"
                     >
                         submit</el-button
                     >
@@ -63,6 +60,7 @@
 <script>
 import axios from 'axios'
 import { ElMessage } from 'element-plus'
+import { resumeregisterjobApi } from '@/request/api'
 
 const openMessage = (message) => {
     ElMessage({
@@ -86,7 +84,21 @@ export default {
                 name: '',
                 lastname: ''
             },
-            file: ''
+            file: '',
+            rules: {
+                email: [
+                    { required: true, message: 'Please enter your email address', trigger: 'blur' },
+                    {
+                        type: 'email',
+                        message: 'Please enter a valid email address',
+                        trigger: ['blur', 'change']
+                    }
+                ],
+                name: [{ required: true, message: 'Please enter your password', trigger: 'blur' }],
+                lastname: [
+                    { required: true, message: 'Please enter your password', trigger: 'blur' }
+                ]
+            }
         }
     },
     props: {
@@ -97,6 +109,34 @@ export default {
         }
     },
     methods: {
+        handleRemove1() {
+            this.file = ''
+        },
+        handleFileChange(files) {
+            const newFile = files
+            const validFormats = [
+                'text/plain',
+                'application/msword',
+                'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+                'application/pdf'
+            ]
+            const isTxt = validFormats.includes(newFile.type)
+            const isTXT = newFile.name.toLowerCase().endsWith('.txt')
+            const isDOC = newFile.name.toLowerCase().endsWith('.doc')
+            const isDOCX = newFile.name.toLowerCase().endsWith('.docx')
+            const isPDF = newFile.name.toLowerCase().endsWith('.pdf')
+
+            if (!isTxt && !isTXT && !isDOC && !isDOCX && !isPDF) {
+                this.$message.error('上传文件必须是 txt、TXT、doc、docx 或 pdf 类型！')
+                this.$refs.upload.clearFiles()
+                return false // 阻止上传
+            }
+
+            // 清空之前选择的文件
+            this.file = ''
+            // 设置新选择的文件
+            this.file = newFile.raw
+        },
         selectFile(e) {
             console.log(e)
         },
@@ -117,7 +157,7 @@ export default {
             // 可以在这里做一些其他的操作，比如显示错误信息等
         },
         submitForm(formName) {
-            this.$refs[formName].validate((valid) => {
+            this.$refs[formName].validate(async (valid) => {
                 if (valid) {
                     const formData = new FormData()
 
@@ -132,44 +172,19 @@ export default {
                     if (this.file) {
                         formData.append('file', this.file)
                     }
-                    axios
-                        .post('http://192.168.0.45/resumeregisterjob', formData, {
-                            headers: {
-                                'Content-Type': 'multipart/form-data'
-                            }
-                        })
-                        .then((response) => {
-                            if (
-                                typeof response.data != 'undefined' &&
-                                response.data.code == 1 &&
-                                typeof response.data.msg != 'undefined'
-                            ) {
-                                // openMessage(response.data.msg);
-                                ElMessage({
-                                    message: response.data.msg,
-                                    type: 'error',
-                                    offset: window.screen.height / 3
-                                })
-                            } else {
-                                var elements = document.querySelectorAll(
-                                    '.el-dialog__body .el-icon'
-                                )
-                                var firstElement = elements[0]
-                                firstElement.click()
-                                this.$emit('close')
-                                // this.$router.push({
-                                //   name: 'Index',
-                                //   query: {}
-                                // });
-                                // window.location.href='index.html#/logon';
-                            }
+                    let response = await resumeregisterjobApi(formData)
 
-                            // 根据需要更新UI或执行其他操作
+                    if (response.code == 0) {
+                        var elements = document.querySelectorAll('.el-dialog__body .el-icon')
+                        var firstElement = elements[0]
+                        firstElement.click()
+                        this.$emit('close')
+                    } else {
+                        ElMessage({
+                            message: response.msg,
+                            offset: window.screen.height / 3
                         })
-                        .catch((error) => {
-                            // 处理错误
-                            console.error(error)
-                        })
+                    }
                 } else {
                     console.log('error submit!!')
                     return false
@@ -201,11 +216,22 @@ export default {
         :deep(.el-form-item__content) {
             display: flex;
             justify-content: center;
-            background-color: #f7f7f7;
+            // background-color: #f7f7f7;
             border-radius: 5px;
         }
+        .upload-demo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+            height: 49px;
+            width: 100%;
+        }
         .btn-upload {
+            width: 100%;
+            display: block;
             color: #a5a5a5;
+            background-color: #f7f7f7;
             font-weight: 400;
             cursor: pointer;
             img {

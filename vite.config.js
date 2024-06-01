@@ -49,7 +49,7 @@ export default defineConfig({
     server: {
         proxy: {
             '/api': {
-                target: 'http://cnjob.sc798.com/',
+                target: 'http://192.168.0.8',
                 changeOrigin: true,
                 // secure:true,//是否https接口
                 // ws:true,//是否代理websockets

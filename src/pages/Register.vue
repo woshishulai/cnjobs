@@ -59,6 +59,7 @@
                             ref="upload"
                             class="upload-demo"
                             :limit="1"
+                            :on-remove="handleRemove1"
                             @change="handleFileChange"
                             :auto-upload="false"
                         >
@@ -194,6 +195,9 @@ export default {
     },
     props: {},
     methods: {
+        handleRemove1() {
+            this.file = ''
+        },
         handleFileChange(files) {
             const newFile = files
             const validFormats = [

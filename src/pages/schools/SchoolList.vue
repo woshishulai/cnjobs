@@ -177,7 +177,7 @@ export default {
                 }
 
                 const response = await getSchoolList(formData)
-                console.log(response)
+                console.log(response, '2345t')
                 // 将返回的数据赋值给 data 属性
                 // this.title = response.data.title;
                 // alert(JSON.stringify(response.data))

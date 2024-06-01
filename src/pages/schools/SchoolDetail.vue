@@ -18,17 +18,9 @@
                             <label> {{ school_info.school_name }}</label>
                             <span class="text-lightgray" style="padding: 0 10px"> | </span>
                             <span class="text-lightgray">MC{{ school_info.id }}</span>
-                            <!--              <label> Beijing Limai International School</label>-->
-                            <!--              <span class="text-lightgray" style="padding: 0 10px"> | </span>-->
-                            <!--              <span class="text-lightgray">MC1200</span>-->
                         </div>
                         <p>
                             {{ school_info.school_profile }}
-                            <!--              Through the teaching philosophy of international integration, independent and-->
-                            <!--              innovative international courses, elite teaching teams from China and the United-->
-                            <!--              States, and scientific teaching methods, we aim to cultivate students into outstanding-->
-                            <!--              talents with an international perspective who share love and responsibility,-->
-                            <!--              inspiration and knowledge, health and happiness.-->
                         </p>
                     </el-col>
                     <el-col class="hidden-xs-only" :sm="6" :md="6" style="text-align: center">
@@ -36,42 +28,32 @@
                             :src="school_info.school_logo"
                             style="width: 100%; max-width: 100px; height: auto"
                         />
-                        <!--            <img-->
-                        <!--              src="@/images/school_logo.jpeg"-->
-                        <!--              style="width: 100%; max-width: 100px; height: auto"-->
-                        <!--            />-->
                     </el-col>
                 </el-row>
                 <div class="simple-list">
                     <div class="simple-list-item">
                         <label>Location:</label>
                         <span> {{ school_info.province }}</span>
-                        <!--            <span>Haidian District, Beijing</span>-->
                     </div>
                     <div>
                         <label>School Type:</label>
                         <span>{{ school_info.type_name }}</span>
-                        <!--            <span>Private School</span>-->
                     </div>
                     <div>
                         <label>Year of Found:</label>
                         <span>{{ school_info.add_time }}</span>
-                        <!--            <span>2011</span>-->
                     </div>
                     <div>
                         <label>Student Age:</label>
                         <span>{{ school_info.student_age }}</span>
-                        <!--            <span>Kindergarten, G1-G2</span>-->
                     </div>
                     <div>
                         <label>Number of Foreign Teacher:</label>
                         <span>{{ school_info.foreign_teachers_num }}</span>
-                        <!--            <span>50</span>-->
                     </div>
                     <div>
                         <label>Number of Total Students:</label>
                         <span>{{ school_info.students_num }}</span>
-                        <!--            <span>50</span>-->
                     </div>
                 </div>
                 <div class="box-footer">
@@ -82,7 +64,6 @@
                     <el-button @click="showNotice" round class="btn-black">
                         <img src="@/images/icon-email.png" />
                         <label> Email School HR</label>
-                        <!--            <label> Email School HR</label>-->
                     </el-button>
                 </div>
             </div>
@@ -92,40 +73,9 @@
                     <el-icon><CaretBottom /></el-icon>
                 </div>
                 <div class="box-body">
-                    <p>
-                        {{ school_info.school_profile }}
-                        <!--            The International Department of Shenzhen Foreign Language School (hereinafter referred-->
-                        <!--            to as the Shenzhen International Department) is located on the beautiful shore of-->
-                        <!--            Shenzhen Bay and is an international school invested and built by the Shenzhen Municipal-->
-                        <!--            Government for grades Pre-K to 12. The school covers an area of 24000 square meters,-->
-                        <!--            with a building area of 42000 square meters, and has first-class hardware facilities.-->
-                        <!--            The construction area is located in a rapidly developing city like Shenzhen. The-->
-                        <!--            International Department of Shenzhen Foreign Studies has two main goals: to provide-->
-                        <!--            high-quality international education services for the children of foreign and Hong Kong,-->
-                        <!--            Macao, and Taiwan working in Shenzhen; And become a first-class international school in-->
-                        <!--            China and a window for international education in Shenzhen. The Shenzhen International-->
-                        <!--            Department has opened 54 classes and can accommodate 1080 students. In addition, the-->
-                        <!--            school's first-class hardware facilities and diverse extracurricular activities also-->
-                        <!--            provide strong support for the education and teaching of the Shenzhen Foreign Studies-->
-                        <!--            International Department. The International Department of Shenzhen Foreign Studies-->
-                        <!--            adopts small class teaching to provide international education services for children-->
-                        <!--            aged four to twelve. We have hired professional teachers from different countries and-->
-                        <!--            cultural backgrounds around the world who are highly passionate about education. Through-->
-                        <!--            an international teaching philosophy and management model, and adopting the-->
-                        <!--            international diploma curriculum framework, we are committed to providing world-class-->
-                        <!--            international education services for parents and children. The International Department-->
-                        <!--            of Shenzhen Foreign Studies adopts the curriculum system of the International-->
-                        <!--            Baccalaureate Organization (IBO), and currently all three programs (PYP/MYP/DP) have-->
-                        <!--            been authorized. The school is also a certified school by the Council of International-->
-                        <!--            Schools, a certified school by the Western Association of Schools and Colleges in the-->
-                        <!--            United States, a member school of the East Asian Association of Overseas Schools-->
-                        <!--            (EARCOS), and the China Mongolia Association of International Schools (ACAMIS). The-->
-                        <!--            school also strives to integrate comprehensive worldview education, Chinese language-->
-                        <!--            education, and cultural education into its curriculum.-->
-                    </p>
+                    <p v-html="school_info.school_profile"></p>
                     <p style="text-align: center">
                         <img :src="school_info.school_logo" />
-                        <!--            <img src="@/images/school1.jpg" />-->
                     </p>
                 </div>
             </div>
@@ -164,7 +114,7 @@ import Breadcrumb from '../../components/Breadcrumb.vue'
 import SimilarSchools from '../../components/SimilarSchools.vue'
 import axios from 'axios'
 import { ElMessage } from 'element-plus'
-import { getSchoolDetails } from '../../request/api'
+import { getSchoolDetails, isUserLogin } from '../../request/api'
 
 const openMessage = (message) => {
     ElMessage({

@@ -132,8 +132,7 @@ export default {
                     if (res.code == 1) {
                         ElMessage({
                             message: res.msg,
-                            type: 'error',
-                            offset: window.screen.height / 3
+                            type: 'error'
                         })
                     } else {
                         document.querySelector('.isyincang').style.display = 'none'
@@ -141,6 +140,11 @@ export default {
                         document.querySelector('.zheli').style.display = 'none'
                         document.querySelector('.xinde').style.display = ''
                         document.querySelector('.xomdeua').style.display = ''
+                        const elements = document.querySelectorAll('.names')
+                        elements.forEach((element) => {
+                            element.innerHTML = this.form.Email
+                        })
+
                         // document.querySelector('.username').innerHTML = res.info.email
                         this.$router.push('/')
                         // this.$router.go(-1);
