@@ -97,7 +97,14 @@
                                 </div>
                             </div>
                         </div>
-                        <div style="padding-bottom: 40px">
+                        <div
+                            style="
+                                padding-bottom: 40px;
+                                display: flex;
+                                align-items: center;
+                                justify-content: center;
+                            "
+                        >
                             <el-pagination
                                 background
                                 layout="prev, pager, next"

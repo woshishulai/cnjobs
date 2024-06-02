@@ -1,10 +1,10 @@
 <template>
     <div class="timeline">
-        <div class="node" v-for="step in list" :key="step">
+        <div class="node" v-for="(step, index) in list" :key="step">
             <div class="icon-box" style="">
                 <div class="node-trunk" style="">
                     <div class="node-icon" style="">
-                        <img class="icon" :src="step.icon" />
+                        <img class="icon" :src="activities[index].icon" />
                     </div>
                     <div class="node-branch" style=""></div>
                     <div class="node-dot">

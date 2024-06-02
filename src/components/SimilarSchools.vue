@@ -17,7 +17,7 @@
         </div>
         <el-row :gutter="20">
             <el-col :xs="14" :sm="12" :md="8" v-for="(school, index) in schools" :key="index">
-                <div class="card-noborder school-card">
+                <div class="card-noborder school-card" @click="show(school)">
                     <div class="school-title" style="display: flex; align-items: center">
                         <img
                             src="/images/school_logo.jpeg"
@@ -101,7 +101,13 @@ export default {
     data() {
         return {}
     },
-    methods: {}
+    methods: {
+        show(item) {
+            this.$emit('changeShow', item.id)
+
+            this.$router.push({ path: '/schools/' + item.id })
+        }
+    }
 }
 </script>
 
@@ -109,6 +115,10 @@ export default {
 .school-card {
     padding: 20px;
     margin-bottom: 20px;
+    cursor: pointer;
+    &:hover {
+        box-shadow: 3px 3px 3px 3px rgba(0, 0, 0.1, 0.3);
+    }
     .school-title {
         padding: 10px 0 40px 0;
         border-bottom: 1px dotted #b4b4b4;

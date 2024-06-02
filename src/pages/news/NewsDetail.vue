@@ -67,6 +67,7 @@
                         <div
                             v-for="(news, index) in recentNews"
                             :key="index"
+                            @click="show(news)"
                             class="news-list-item"
                         >
                             <div>
@@ -147,7 +148,19 @@ export default {
             recentNews: []
         }
     },
-    methods: {}
+    methods: {
+        async show(item) {
+            console.log(item)
+            this.id = item.id
+            const formData = new FormData()
+            formData.append('id', this.id)
+            let response = await newsdetailApi(formData)
+            if (response.code == 0) {
+                this.newsInfo = response.data
+                this.recentNews = response.sdata
+            }
+        }
+    }
 }
 </script>
 
@@ -185,6 +198,7 @@ export default {
     margin-bottom: 40px;
     .news-list-item {
         margin: 20px 0;
+        cursor: pointer;
         padding-bottom: 20px;
         border-bottom: 1px dotted #d3d3d3;
         div {

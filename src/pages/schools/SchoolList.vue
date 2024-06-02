@@ -156,7 +156,8 @@ export default {
                 location: ''
             },
             totalnum: 0,
-            schools: []
+            schools: [],
+            currentPage: 1
         }
     },
     props: {},

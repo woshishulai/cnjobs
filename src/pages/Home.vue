@@ -217,38 +217,87 @@
             </el-row>
         </el-col>
     </el-row>
+    <div class="feedback">
+        <div class="feedback-title">
+            <h1 v-html="feedback?.main?.title"></h1>
+            <p v-html="feedback?.main?.stitle"></p>
+        </div>
+        <el-carousel indicator-position="none" :height="heights + 'px'">
+            <el-carousel-item
+                v-for="(items, index) in feedback?.childs"
+                :key="index"
+                class="swiper-item"
+            >
+                <div
+                    v-for="(item, isndex) in items"
+                    :key="isndex"
+                    style="
+                        width: 32%;
+                        min-width: 330px;
+                        flex: 1;
+                        max-width: 400px;
+                        gap: 30px;
+                        margin: 0 auto;
+                    "
+                >
+                    <div class="feedback-item">
+                        <div class="feedback-item-title">
+                            <span></span>
+                            <span>{{ item?.title }}</span>
+                            <span></span>
+                        </div>
+                        <div class="feedback-item-desc">
+                            <p>
+                                {{ item?.stitle }}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </el-carousel-item>
+        </el-carousel>
+    </div>
 
-    <el-row class="feedback" style="">
-        <el-col :span="20" :offset="2">
+    <!-- <el-row class="feedback" style=""> -->
+    <!-- <el-col :span="20" :offset="2">
             <div class="feedback-title">
                 <h1 v-html="feedback?.main?.title"></h1>
                 <p v-html="feedback?.main?.stitle"></p>
-            </div>
-            <el-row :gutter="20">
-                <el-carousel :interval="4000" height="atuo">
-                    <el-col
-                        :xs="24"
-                        :sm="12"
-                        :md="8"
-                        v-for="(item, index) in feedback?.childs"
-                        :key="index"
-                        class="feedback-item"
+            </div> -->
+    <!-- <el-carousel indicator-position="none" :height="heights + 'px'">
+                <el-carousel-item
+                    v-for="(items, index) in feedback?.childs"
+                    :key="index"
+                    class="swiper-item"
+                >
+                    <div
+                        v-for="(item, isndex) in items"
+                        :key="isndex"
+                        style="
+                            width: 32%;
+                            min-width: 330px;
+                            flex: 1;
+                            max-width: 400px;
+                            gap: 30px;
+                            margin: 0 auto;
+                        "
                     >
-                        <el-carousel-item class="feedback-item">
-                            <div>
-                                <div class="feedback-item-title">
-                                    <span></span>
-                                    <span>{{ item?.title }}</span>
-                                    <span></span>
-                                </div>
-                                <div class="feedback-item-desc">
-                                    <p>
-                                        {{ item?.stitle }}
-                                    </p>
-                                </div>
+                        <div class="feedback-item">
+                            <div class="feedback-item-title">
+                                <span></span>
+                                <span>{{ item?.title }}</span>
+                                <span></span>
                             </div>
-                        </el-carousel-item>
-                    </el-col>
+                            <div class="feedback-item-desc">
+                                <p>
+                                    {{ item?.stitle }}
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </el-carousel-item>
+            </el-carousel>
+            <el-row :gutter="20"> -->
+    <!-- <el-col :xs="24" :sm="12" :md="8" v-for="(item, index) in feedback?.childs">
                     <div class="feedback-item">
                         <div class="feedback-item-title">
                             <span></span>
@@ -261,24 +310,10 @@
                             </p>
                         </div>
                     </div>
-                </el-carousel>
-                <el-col :xs="24" :sm="12" :md="8" v-for="(item, index) in feedback?.childs">
-                    <div class="feedback-item">
-                        <div class="feedback-item-title">
-                            <span></span>
-                            <span>{{ item?.title }}</span>
-                            <span></span>
-                        </div>
-                        <div class="feedback-item-desc">
-                            <p>
-                                {{ item?.stitle }}
-                            </p>
-                        </div>
-                    </div>
-                </el-col>
-            </el-row>
-        </el-col>
-    </el-row>
+                </el-col> -->
+    <!-- </el-row> -->
+    <!-- </el-col> -->
+    <!-- </el-row> -->
     <el-row class="news" style="">
         <el-col :span="20" :offset="2">
             <div style="padding: 40px 0; text-align: center">
@@ -398,11 +433,31 @@ export default {
             newsList: [],
             xuanze: {},
             howWork: {},
-            feedback: {}
+            feedback: {},
+            heights: 370
         }
     },
     props: {},
+    mounted() {
+        this.adjustHeights()
+        window.addEventListener('resize', this.adjustHeights)
+    },
+    beforeDestroy() {
+        // Remove resize event listener
+        window.removeEventListener('resize', this.adjustHeights)
+    },
     methods: {
+        adjustHeights() {
+            if (window.innerWidth < 740) {
+                this.heights = 1200
+                return
+            }
+            if (window.innerWidth < 1090) {
+                this.heights = 800
+                return
+            }
+            this.heights = 370
+        },
         setZoomClass(event) {
             if (event.type == 'mouseenter') {
                 let zooming = event.target.getAttribute('zooming')
@@ -555,6 +610,15 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.swiper-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 30px;
+    padding: 0 20px;
+}
+
 .top {
     margin-top: 112px;
 }

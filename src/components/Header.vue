@@ -222,6 +222,7 @@ export default {
     max-width: 1300px;
     height: 112px;
     margin: 0 auto;
+    padding: 0 20px;
     .phone {
         display: none;
     }

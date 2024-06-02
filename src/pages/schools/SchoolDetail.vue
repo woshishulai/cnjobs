@@ -11,26 +11,69 @@
             <breadcrumb :breadcrumbs="breadcrumbs" />
         </el-col>
         <el-col :span="20" :offset="2">
-            <div class="box-yellow">
+            <div
+                class="box-yellow"
+                style="padding: 40px 0 0; box-shadow: 1px 1px 1px 1px rgba(0, 0, 0.1, 0.1)"
+            >
                 <el-row :gutter="20">
-                    <el-col :xs="24" :sm="18" :md="18">
+                    <el-col :xs="24" :sm="18" :md="18" style="background-color: transparent">
                         <div class="box-title">
-                            <label> {{ school_info.school_name }}</label>
-                            <span class="text-lightgray" style="padding: 0 10px"> | </span>
-                            <span class="text-lightgray">MC{{ school_info.id }}</span>
+                            <label
+                                style="
+                                    font-family: Arial;
+                                    font-weight: 400;
+                                    font-size: 24px;
+                                    padding: 0 0px 0 40px;
+                                    color: #000000;
+                                "
+                            >
+                                {{ school_info.school_name }}</label
+                            >
+                            <span
+                                style="
+                                    font-family: Arial;
+                                    font-weight: 400;
+                                    font-size: 14px;
+                                    color: #474747;
+                                    padding: 0 10px;
+                                "
+                                class="text-lightgray"
+                            >
+                                |
+                            </span>
+                            <span
+                                style="
+                                    font-family: Arial;
+                                    font-weight: 400;
+                                    font-size: 16px;
+                                    color: #7f7f7f;
+                                "
+                                class="text-lightgray"
+                                >MC{{ school_info.id }}</span
+                            >
                         </div>
-                        <p>
-                            {{ school_info.school_profile }}
-                        </p>
+                        <p
+                            style="
+                                font-family: Arial;
+                                font-weight: 400;
+                                font-size: 14px;
+                                line-height: 20px;
+                                padding: 0 0px 0 40px;
+                                margin-bottom: 40px;
+
+                                color: #474747;
+                            "
+                            v-html="school_info.school_profile"
+                        ></p>
                     </el-col>
                     <el-col class="hidden-xs-only" :sm="6" :md="6" style="text-align: center">
                         <img
                             :src="school_info.school_logo"
-                            style="width: 100%; max-width: 100px; height: auto"
+                            style="width: 100%; max-width: 100px; height: auto; padding-right: 40px"
                         />
                     </el-col>
                 </el-row>
-                <div class="simple-list">
+                <div class="simple-list" style="background: #fbfbfb; color: #010101; padding: 40px">
                     <div class="simple-list-item">
                         <label>Location:</label>
                         <span> {{ school_info.province }}</span>
@@ -56,7 +99,13 @@
                         <span>{{ school_info.students_num }}</span>
                     </div>
                 </div>
-                <div class="box-footer">
+                <div
+                    style="height: 1px; width: 80%; margin-left: 40px; border: 1px dashed #fbfbfb"
+                ></div>
+                <div
+                    class="box-footer"
+                    style="background: #fbfbfb; padding-bottom: 40px; cursor: pointer"
+                >
                     <el-button @click="gourl(school_info.official_website)" round class="btn-black">
                         <img src="@/images/icon-earth.png" />
                         <label>Visit School Website</label>
@@ -67,20 +116,44 @@
                     </el-button>
                 </div>
             </div>
-            <div class="box-yellow">
+            <div
+                class="box-yellow"
+                style="background: #fbfbfb; box-shadow: 1px 1px 1px 1px rgba(0, 0, 0.1, 0.1)"
+            >
                 <div class="box-title">
-                    <label style="padding-right: 10px"> About us</label>
+                    <label
+                        style="
+                            padding-right: 10px;
+                            height: 16px;
+                            font-family: Arial;
+                            font-weight: bold;
+                            font-size: 22px;
+                            color: #000000;
+                            line-height: 28px;
+                        "
+                    >
+                        About us</label
+                    >
                     <el-icon><CaretBottom /></el-icon>
                 </div>
                 <div class="box-body">
-                    <p v-html="school_info.school_profile"></p>
+                    <p
+                        style="
+                            font-family: Arial;
+                            font-weight: 400;
+                            font-size: 14px;
+                            color: #474747;
+                            line-height: 28px;
+                        "
+                        v-html="school_info.school_profile"
+                    ></p>
                     <p style="text-align: center">
                         <img :src="school_info.school_logo" />
                     </p>
                 </div>
             </div>
             <div>
-                <SimilarSchools :schools="similarSchools"></SimilarSchools>
+                <SimilarSchools @changeShow="changeShow" :schools="similarSchools"></SimilarSchools>
             </div>
         </el-col>
         <el-dialog v-model="noticeVisible" :show-close="false" align-center width="300px">
@@ -213,6 +286,16 @@ export default {
     props: {},
     mounted() {},
     methods: {
+        async changeShow(id) {
+            const formData = new FormData()
+            formData.append('id', id)
+            const response = await getSchoolDetails(formData)
+            if (response.code == 1) {
+            } else {
+                this.school_info = response.data
+                this.similarSchools = response.sdata
+            }
+        },
         async showNotice() {
             //判断是否登录
             let response = await isUserLogin()
@@ -266,10 +349,8 @@ export default {
     line-height: 24px;
 }
 .box-footer {
-    margin-top: 20px;
     padding-top: 40px;
     text-align: center;
-    border-top: 1px solid #dcdcdc;
     label {
         padding-left: 10px;
     }

@@ -3,9 +3,9 @@ import { ElNotification } from 'element-plus'
 const instance = axios.create({
     // axios 的一些配置，baseURL  timeout
     //开发
-    baseURL: '/api',
+    // baseURL: '/api',
     //生产
-    // baseURL: 'http://cnjob.sc798.com',
+    baseURL: 'http://cnjob.sc798.com',
     timeout: 100000000000000
 })
 instance.interceptors.request.use(

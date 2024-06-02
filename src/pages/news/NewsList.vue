@@ -66,7 +66,14 @@
                         </div>
                     </el-col>
                 </el-row>
-                <div style="padding-bottom: 40px">
+                <div
+                    style="
+                        padding-bottom: 40px;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                    "
+                >
                     <el-pagination
                         :total="totalnum"
                         @current-change="handlePageChange"
@@ -101,6 +108,7 @@ export default {
             newsList: [],
             totalnum: 0,
             isActive: 'all',
+            currentPage: 1,
 
             newsList1: [
                 {

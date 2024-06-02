@@ -32,7 +32,14 @@
                         </div>
                     </el-col>
                 </el-row>
-                <div style="padding-bottom: 40px">
+                <div
+                    style="
+                        padding-bottom: 40px;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                    "
+                >
                     <el-pagination
                         background
                         layout="prev, pager, next"
@@ -56,8 +63,9 @@ export default {
     components: { Breadcrumb },
     async created() {
         // this.id=this.$route.params.id;
-        const formData = new FormData()
-        // formData.append('id', this.id);
+        const formData = {
+            page: this.currentPage
+        }
         let response = await downloadlistApi(formData)
         console.log(response)
         this.downloadInfo = response.data
@@ -97,12 +105,16 @@ export default {
                 { url: '/downloads', name: 'Download' }
             ],
             downloadInfo: [],
-
+            currentPage: 1,
             totalnum: 0
         }
     },
     props: {},
     methods: {
+        handlePageChange(newPage) {
+            this.currentPage = newPage
+            this.fetchData() // 发送请求获取数据
+        },
         async dowloadfile(id) {
             try {
                 // alert(JSON.stringify(this.downloadInfo))
