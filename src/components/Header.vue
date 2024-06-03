@@ -31,7 +31,7 @@
                 >
             </div>
 
-            <div class="isxianshi phone xomdeua">
+            <div class="isxianshi phone xomdeua" style="display: none">
                 <table>
                     <tr>
                         <td style="padding-right: 10px">
@@ -48,6 +48,7 @@
                                     text-align: center;
                                     line-height: 30px;
                                     color: white;
+                                    display: none;
                                 "
                             >
                                 logout
@@ -134,7 +135,6 @@ export default {
     async created() {
         let res = await getUserInfoApi()
         if (res.code == 1) {
-            this.$router.push('/logon')
         } else {
             this.user_info = res.data
             document.querySelector('.isyincang').style.display = 'none'

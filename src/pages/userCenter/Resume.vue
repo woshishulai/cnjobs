@@ -1,19 +1,22 @@
 <template>
     <user-center active-menu="resume" max-width="">
-        <el-form :model="form" ref="form" label-position="left" label-width="150px">
-            <el-form-item label="Name:">
+        <el-form :model="form" ref="form" label-position="left" :rules="rules" label-width="150px">
+            <el-form-item label="First Name:" prop="name">
                 <el-input v-model="form.name"></el-input>
             </el-form-item>
-            <el-form-item label="Contact information:">
+            <el-form-item label="Last Name:" prop="lastname">
+                <el-input v-model="form.lastname"></el-input>
+            </el-form-item>
+            <el-form-item label="Contact information:" prop="phone">
                 <el-input v-model="form.phone"></el-input>
             </el-form-item>
-            <el-form-item label="Education:">
+            <el-form-item label="Education:" prop="edu">
                 <el-input v-model="form.edu"></el-input>
             </el-form-item>
-            <el-form-item label="Basic Information:">
+            <el-form-item label="Basic Information:" prop="basic_information">
                 <el-input v-model="form.basic_information"></el-input>
             </el-form-item>
-            <el-form-item label="Work experience:">
+            <el-form-item label="Work experience:" prop="work_experience">
                 <el-input
                     v-model="form.work_experience"
                     type="textarea"
@@ -113,6 +116,11 @@ export default {
             if (response.code == 0) {
                 console.log(response)
                 this.form = response.data
+            } else {
+                ElMessage({
+                    message: response.msg,
+                    type: 'error'
+                })
             }
         } catch (error) {
             console.log(error)
@@ -134,7 +142,29 @@ export default {
             school_id: 0,
             resume: '',
             video: '',
-            resume_info: []
+            resume_info: [],
+            rules: {
+                name: [{ required: true, message: 'Please enter your name', trigger: 'blur' }],
+                lastname: [
+                    { required: true, message: 'Please enter your lastname', trigger: 'blur' }
+                ],
+                phone: [{ required: true, message: 'Please enter your phone', trigger: 'blur' }],
+                edu: [{ required: true, message: 'Please enter your edu', trigger: 'blur' }],
+                basic_information: [
+                    {
+                        required: true,
+                        message: 'Please enter your basic_information',
+                        trigger: 'blur'
+                    }
+                ],
+                work_experience: [
+                    {
+                        required: true,
+                        message: 'Please enter your work_experience',
+                        trigger: 'blur'
+                    }
+                ]
+            }
         }
     },
     props: {},
@@ -216,6 +246,11 @@ export default {
         async submitForm(formName) {
             this.$refs[formName].validate(async (valid) => {
                 if (valid) {
+                    const loading = ElLoading.service({
+                        lock: true,
+                        text: 'Loading',
+                        background: 'rgba(0, 0, 0, 0.7)'
+                    })
                     try {
                         const formData = new FormData()
                         formData.append('name', this.form.name)
@@ -230,11 +265,6 @@ export default {
                         if (this.video) {
                             formData.append('video', this.video)
                         }
-                        const loading = ElLoading.service({
-                            lock: true,
-                            text: 'Loading',
-                            background: 'rgba(0, 0, 0, 0.7)'
-                        })
                         let response = await userInfoCenterChangeApi(formData)
                         console.log(response)
                         if (response.code == 0) {
@@ -258,10 +288,14 @@ export default {
                             type: 'error',
                             offset: window.screen.height / 3
                         })
+                        loading.close()
                     }
                 } else {
+                    loading.close()
+
                     console.error('Form validation failed')
                 }
+                loading.close()
             })
         }
     }

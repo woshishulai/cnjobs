@@ -20,11 +20,11 @@ instance.interceptors.request.use(
 instance.interceptors.response.use(
     (res) => {
         if (res.data.code == 1) {
-            ElNotification({
-                title: res.data.msg,
-                message: res.data.msg,
-                type: 'error'
-            })
+            // ElNotification({
+            //     title: res.data.msg,
+            //     message: res.data.msg,
+            //     type: 'error'
+            // })
         }
         return res.data
     },

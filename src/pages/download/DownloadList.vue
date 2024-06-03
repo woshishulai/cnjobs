@@ -1,5 +1,7 @@
 <template>
     <div class="wrap">
+        <el-progress :percentage="jinduy" v-show="jinduy > 0 && jinduy != 100" />
+
         <el-row class="text-primary" style="background-color: #f8f9fa">
             <el-col :span="20" :offset="2">
                 <breadcrumb :breadcrumbs="breadcrumbs" />
@@ -106,7 +108,8 @@ export default {
             ],
             downloadInfo: [],
             currentPage: 1,
-            totalnum: 0
+            totalnum: 0,
+            jinduy: 0
         }
     },
     props: {},
@@ -116,30 +119,35 @@ export default {
             this.fetchData() // 发送请求获取数据
         },
         async dowloadfile(id) {
-            try {
-                // alert(JSON.stringify(this.downloadInfo))
-                // 假设文件的URL是 /public/downloads/example.pdf
-                // alert('http://192.168.0.45/'+id)
-                const response = await axios.get('api' + id, {
-                    // const response = await axios.get('http://192.168.0.45/'+this.downloadInfo.url, {
-                    responseType: 'blob' // 告诉axios我们期望得到一个blob对象
-                })
+            //在这里控制进度
+            const xhr = new XMLHttpRequest()
+            xhr.open('GET', 'http://cnjob.sc798.com/' + id)
+            xhr.responseType = 'blob'
 
-                // 创建一个链接元素来下载文件
-                const url = window.URL.createObjectURL(response.data)
-                const link = document.createElement('a')
-                link.href = url
-                link.setAttribute('download', 'example.pdf') // 设置下载文件的名称
-
-                // 触发点击事件来下载文件
-                document.body.appendChild(link)
-                link.click()
-
-                // 释放URL对象
-                window.URL.revokeObjectURL(url)
-            } catch (error) {
-                console.error('下载文件时发生错误:', error)
+            xhr.onprogress = (event) => {
+                if (event.lengthComputable) {
+                    const progress = Math.round((event.loaded / event.total) * 100)
+                    this.jinduy = progress
+                }
             }
+
+            xhr.onload = () => {
+                if (xhr.status === 200) {
+                    const blob = xhr.response
+                    const url = window.URL.createObjectURL(blob)
+                    const link = document.createElement('a')
+                    link.href = url
+                    link.setAttribute('download', 'example.pdf')
+                    document.body.appendChild(link)
+                    link.click()
+                    window.URL.revokeObjectURL(url)
+                } else {
+                    console.error('下载文件时发生错误:', xhr.status)
+                }
+            }
+
+            xhr.send()
+
             // var fileUrl = 'http://192.168.0.45/uploads/dowloads/1110.pdf';
             // // var fileUrl = 'http://192.168.0.45/uploads/dowloads/1110.pdf' + this.downloadInfo.url;
             // // 创建一个隐藏的<a>元素，用于下载文件

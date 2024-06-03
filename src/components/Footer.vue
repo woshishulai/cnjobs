@@ -67,6 +67,7 @@
 
 <script>
 import { getAboutDetails } from '../request/api.js'
+import { ElMessage } from 'element-plus'
 
 export default {
     name: 'Footer',
@@ -75,7 +76,11 @@ export default {
         const formData = new FormData()
         formData.append('id', this.id)
         let res = await getAboutDetails()
-        if (res.data.code == 1) {
+        if (res.code == 1) {
+            ElMessage({
+                message: res.msg,
+                type: 'error'
+            })
         } else {
             this.aboutInfo = res.data
             this.schoolList = res.sdata

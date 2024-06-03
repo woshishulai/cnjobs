@@ -205,6 +205,10 @@ export default {
         formData.append('id', this.id)
         const response = await getSchoolDetails(formData)
         if (response.code == 1) {
+            ElMessage({
+                message: response.msg,
+                type: 'error'
+            })
         } else {
             this.school_info = response.data
             this.similarSchools = response.sdata

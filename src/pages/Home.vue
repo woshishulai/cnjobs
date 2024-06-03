@@ -147,7 +147,7 @@
                     >
                         <img :src="'http://cnjob.sc798.com' + school.cover" />
                         <div class="partners-desc">
-                            <p>{{ school.desc }}</p>
+                            <p v-html="school.desc"></p>
                             <div class="partners-link">
                                 <a :href="'/index.html#/schools/' + school.id" class="">
                                     Read More</a
@@ -178,7 +178,7 @@
                     >
                         <div class="choose-us-card">
                             <div>
-                                <img src="/images/icon-visa.png" />
+                                <img :src="item?.tubiao" />
                             </div>
                             <div>
                                 <h2 v-html="item?.title"></h2>
@@ -837,6 +837,9 @@ export default {
             0 3px 6px 0 rgba(0, 0, 0, 0.12),
             0 5px 12px 4px rgba(0, 0, 0, 0.09);
         transform: scale(1.1);
+    }
+    h2 {
+        font-weight: 400;
     }
 }
 

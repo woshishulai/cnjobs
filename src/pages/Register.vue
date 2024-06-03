@@ -252,6 +252,11 @@ export default {
                             type: 'success'
                         })
                         this.$router.push('/logon')
+                    } else {
+                        ElMessage({
+                            message: res.msg,
+                            type: 'none'
+                        })
                     }
                 } else {
                     return false

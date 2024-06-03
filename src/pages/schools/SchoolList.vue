@@ -208,6 +208,10 @@ export default {
                     this.currentPage = 1
                     const response = await getSchoolList(formData)
                     if (response.code == 1) {
+                        ElMessage({
+                            message: response.msg,
+                            type: 'error'
+                        })
                     } else {
                         this.totalnum = response.totalnum
                         this.schools = response.data
