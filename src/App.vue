@@ -38,6 +38,35 @@ export default {
     }
 }
 </script>
+<style>
+@font-face {
+    font-family: 'iconfont'; /* Project id 4572259 */
+    src:
+        url('//at.alicdn.com/t/c/font_4572259_f89hs432v1n.woff2?t=1717404350021') format('woff2'),
+        url('//at.alicdn.com/t/c/font_4572259_f89hs432v1n.woff?t=1717404350021') format('woff'),
+        url('//at.alicdn.com/t/c/font_4572259_f89hs432v1n.ttf?t=1717404350021') format('truetype');
+}
+
+.iconfont {
+    font-family: 'iconfont' !important;
+    font-size: 16px;
+    font-style: normal;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-chakantiezidingwei:before {
+    content: '\e65f';
+}
+
+.icon-time:before {
+    content: '\e69d';
+}
+
+.icon-qian:before {
+    content: '\e634';
+}
+</style>
 
 <style lang="scss">
 * {

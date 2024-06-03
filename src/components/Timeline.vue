@@ -148,6 +148,7 @@ export default {
         word-break: break-all;
         overflow: hidden;
         display: -webkit-box;
+        margin-top: 4px;
         -webkit-line-clamp: 2;
         -webkit-box-orient: vertical;
     }

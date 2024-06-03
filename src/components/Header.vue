@@ -167,15 +167,13 @@ export default {
                     text: 'News',
                     path: '/news'
                 },
-
-                {
-                    text: 'About Us',
-                    path: '/about'
-                },
-
                 {
                     text: 'Download',
                     path: '/downloads'
+                },
+                {
+                    text: 'About Us',
+                    path: '/about'
                 }
             ]
         }

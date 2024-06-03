@@ -52,168 +52,174 @@
     </div>
 
     <el-row class="about-us" style="">
-        <el-col :xs="0" :md="7"></el-col>
-        <el-col :xs="24" :md="14">
-            <div style="padding: 40px">
-                <h1 style="color: #2b3b61; font-size: 32px">About Us</h1>
-                <p style="line-height: 22px">
-                    {{ about_info.content }}
-                </p>
-                <el-row :gutter="20" class="number-container" style="color: #ff9300">
-                    <el-col :xs="24" :sm="12" :md="6">
-                        <div>
-                            <label class="big-number">
-                                <count-to
-                                    :start-val="1900"
-                                    :end-val="about_info.start_time"
-                                    :duration="5000"
-                                    separator=""
-                                />
-                                <!--                <count-to :start-val="1900" :end-val="2011" :duration="5000" separator="" />-->
-                            </label>
-                            <span>year</span>
-                        </div>
-                        <div>The company founded on</div>
-                    </el-col>
-                    <el-col :xs="24" :sm="12" :md="6">
-                        <div>
-                            <label class="big-number">
-                                <count-to
-                                    :start-val="0"
-                                    :end-val="about_info.service_num"
-                                    :duration="5000"
-                                    separator=""
-                                />
-                                <!--                <count-to :start-val="0" :end-val="275" :duration="5000" separator="" />-->
-                            </label>
-                            <span>+</span>
-                        </div>
-                        <div>Accumulated customer service</div>
-                    </el-col>
-                    <el-col :xs="24" :sm="12" :md="6">
-                        <div>
-                            <label class="big-number">
-                                <count-to
-                                    :start-val="0"
-                                    :end-val="about_info.success_rate"
-                                    :duration="5000"
-                                    separator=""
-                                />
-                                <!--                <count-to :start-val="0" :end-val="80" :duration="5000" separator="" />-->
-                            </label>
-                            <span>%</span>
-                        </div>
-                        <div>Job success rate</div>
-                    </el-col>
-                    <el-col :xs="24" :sm="12" :md="6">
-                        <div>
-                            <label class="big-number">
-                                <count-to
-                                    :start-val="0"
-                                    :end-val="about_info.friend_num"
-                                    :duration="5000"
-                                    separator=""
-                                />
-                                <!--                <count-to :start-val="0" :end-val="37" :duration="5000" separator="" />-->
-                            </label>
-                            <span>family</span>
-                        </div>
-                        <div>Having partners</div>
-                    </el-col>
-                </el-row>
-            </div>
-        </el-col>
-    </el-row>
-
-    <el-row class="partners" style="">
-        <el-col :span="20" :offset="2">
-            <div class="partners-title">
-                <h1>Partners</h1>
-                <p>Multiple cooperative universities provide diverse job demands</p>
-            </div>
-            <el-row :gutter="20" class="partners-list">
-                <el-col
-                    v-for="(school, index) in school_partners"
-                    :key="index"
-                    :xs="24"
-                    :sm="12"
-                    :md="8"
-                    @mouseenter="setSlideDownClass"
-                >
-                    <div
-                        @mouseenter="setSlideInClass"
-                        @mouseout="setMouseOut"
-                        class="partners-card"
-                    >
-                        <img :src="'http://cnjob.sc798.com' + school.cover" />
-                        <div class="partners-desc">
-                            <p v-html="school.desc"></p>
-                            <div class="partners-link">
-                                <a :href="'/index.html#/schools/' + school.id" class="">
-                                    Read More</a
-                                >
-                                <!--                <a href="#" class=""> Read More</a>-->
-                            </div>
-                        </div>
+        <div class="cen-wrap" style="max-width: 1240px; margin: 0 auto">
+            <el-row style="justify-content: space-between">
+                <el-col :xs="0" :md="7"></el-col>
+                <el-col :xs="24" :md="14">
+                    <div style="padding: 40px 20px">
+                        <h1 style="color: #2b3b61; font-size: 32px">About Us</h1>
+                        <p style="line-height: 22px">
+                            {{ about_info.content }}
+                        </p>
+                        <el-row :gutter="21" class="number-container" style="color: #ff9300">
+                            <el-col :xs="24" :sm="12" :md="6">
+                                <div>
+                                    <label class="big-number">
+                                        <count-to
+                                            :start-val="1900"
+                                            :end-val="about_info.start_time"
+                                            :duration="5000"
+                                            separator=""
+                                        />
+                                        <!--                <count-to :start-val="1900" :end-val="2011" :duration="5000" separator="" />-->
+                                    </label>
+                                    <span>year</span>
+                                </div>
+                                <div style="font-size: 12px">The company founded on</div>
+                            </el-col>
+                            <el-col :xs="24" :sm="12" :md="6">
+                                <div>
+                                    <label class="big-number">
+                                        <count-to
+                                            :start-val="0"
+                                            :end-val="about_info.service_num"
+                                            :duration="5000"
+                                            separator=""
+                                        />
+                                        <!--                <count-to :start-val="0" :end-val="275" :duration="5000" separator="" />-->
+                                    </label>
+                                    <span>+</span>
+                                </div>
+                                <div style="font-size: 12px">Accumulated customer service</div>
+                            </el-col>
+                            <el-col :xs="24" :sm="12" :md="6">
+                                <div>
+                                    <label class="big-number">
+                                        <count-to
+                                            :start-val="0"
+                                            :end-val="about_info.success_rate"
+                                            :duration="5000"
+                                            separator=""
+                                        />
+                                        <!--                <count-to :start-val="0" :end-val="80" :duration="5000" separator="" />-->
+                                    </label>
+                                    <span>%</span>
+                                </div>
+                                <div style="font-size: 12px">Job success rate</div>
+                            </el-col>
+                            <el-col :xs="24" :sm="12" :md="6">
+                                <div>
+                                    <label class="big-number">
+                                        <count-to
+                                            :start-val="0"
+                                            :end-val="about_info.friend_num"
+                                            :duration="5000"
+                                            separator=""
+                                        />
+                                        <!--                <count-to :start-val="0" :end-val="37" :duration="5000" separator="" />-->
+                                    </label>
+                                    <span>family</span>
+                                </div>
+                                <div style="font-size: 12px">Having partners</div>
+                            </el-col>
+                        </el-row>
                     </div>
                 </el-col>
             </el-row>
-        </el-col>
+        </div>
     </el-row>
 
-    <div>
-        <el-row class="choose-us" style="">
-            <el-col :span="20" :offset="2">
-                <div class="choose-us-title">
-                    <h1 v-html="xuanze?.main?.title"></h1>
-                    <p v-html="xuanze?.main?.stitle"></p>
+    <el-row class="partners" style="">
+        <div class="cen-wrap" style="max-width: 1240px; margin: 0 auto">
+            <el-col>
+                <div class="partners-title">
+                    <h1>Partners</h1>
+                    <p>Multiple cooperative universities provide diverse job demands</p>
                 </div>
-                <el-row :gutter="40">
+                <el-row class="partners-list" style="margin: 0 auto" gutter="21">
                     <el-col
+                        v-for="(school, index) in school_partners"
+                        :key="index"
                         :xs="24"
                         :sm="12"
                         :md="8"
-                        v-for="(item, index) in xuanze?.childs"
-                        :key="item.id"
+                        @mouseenter="setSlideDownClass"
                     >
-                        <div class="choose-us-card">
-                            <div>
-                                <img :src="item?.tubiao" />
-                            </div>
-                            <div>
-                                <h2 v-html="item?.title"></h2>
-                                <p v-html="item?.stitle"></p>
+                        <div
+                            @mouseenter="setSlideInClass"
+                            @mouseout="setMouseOut"
+                            class="partners-card"
+                        >
+                            <img :src="'http://cnjob.sc798.com' + school.cover" />
+                            <div class="partners-desc">
+                                <p v-html="school.desc"></p>
+                                <div class="partners-link">
+                                    <a :href="'/index.html#/schools/' + school.id" class="">
+                                        Read More</a
+                                    >
+                                    <!--                <a href="#" class=""> Read More</a>-->
+                                </div>
                             </div>
                         </div>
                     </el-col>
                 </el-row>
             </el-col>
+        </div>
+    </el-row>
+
+    <div>
+        <el-row class="choose-us" style="">
+            <div class="cen-wrap" style="max-width: 1240px; margin: 0 auto">
+                <el-col>
+                    <div class="choose-us-title">
+                        <h1 v-html="xuanze?.main?.title"></h1>
+                        <p v-html="xuanze?.main?.stitle"></p>
+                    </div>
+                    <el-row style="margin: 0 auto" gutter="21">
+                        <el-col
+                            :xs="24"
+                            :sm="12"
+                            :md="8"
+                            v-for="(item, index) in xuanze?.childs"
+                            :key="item.id"
+                        >
+                            <div class="choose-us-card">
+                                <div class="xindeee">
+                                    <img :src="item?.tubiao" />
+                                </div>
+                                <div>
+                                    <h2 v-html="item?.title"></h2>
+                                    <p v-html="item?.stitle"></p>
+                                </div>
+                            </div>
+                        </el-col>
+                    </el-row>
+                </el-col>
+            </div>
         </el-row>
     </div>
 
     <el-row class="steps" style="">
-        <el-col :span="20" :offset="2">
+        <el-col>
             <div class="steps-title">
                 <h1 v-html="howWork?.main?.title"></h1>
                 <p v-html="howWork?.main?.stitle"></p>
             </div>
             <el-row class="steps-box">
-                <el-col :xs="24" :sm="16" :md="16">
+                <div style="margin: 0 auto">
                     <timeline :list="howWork?.childs" />
-                </el-col>
-                <el-col
-                    :xs="24"
-                    :sm="8"
-                    :md="8"
-                    style="position: relative; text-align: center; min-height: 200px"
+                </div>
+                <div
+                    class="xinssdsd"
+                    style="position: relative; width: 326px; text-align: center; min-height: 200px"
                 >
-                    <img class="hidden-sm-and-down" src="/images/bg-cv.png" />
+                    <img class="" src="/images/bg-cv.png" />
                     <div @click="showQuickApply" class="steps-submit-btn">
                         <img src="/images/btn-submit.png" />
 
                         <a @click="showQuickApply" href="#" style=""> SUBMIT CV </a>
                     </div>
-                </el-col>
+                </div>
             </el-row>
         </el-col>
     </el-row>
@@ -222,7 +228,7 @@
             <h1 v-html="feedback?.main?.title"></h1>
             <p v-html="feedback?.main?.stitle"></p>
         </div>
-        <el-carousel indicator-position="none" :height="heights + 'px'">
+        <el-carousel style="max-width: 1240px" indicator-position="none" :height="heights + 'px'">
             <el-carousel-item
                 v-for="(items, index) in feedback?.childs"
                 :key="index"
@@ -315,78 +321,93 @@
     <!-- </el-col> -->
     <!-- </el-row> -->
     <el-row class="news" style="">
-        <el-col :span="20" :offset="2">
-            <div style="padding: 40px 0; text-align: center">
-                <el-button
-                    :class="{ 'btn-yellow': isActive === 'information' }"
-                    @click="setActive('information')"
-                    round
-                    size="large"
-                    class="btn-category"
-                    style=""
-                >
-                    Information
-                </el-button>
+        <div style="max-width: 1240px; margin: 0 auto">
+            <el-col>
+                <div style="padding: 40px 0; text-align: center">
+                    <el-button
+                        :class="{ 'btn-yellow': isActive === 'information' }"
+                        @click="setActive('information')"
+                        round
+                        size="large"
+                        class="btn-category"
+                        style=""
+                    >
+                        Information
+                    </el-button>
 
-                <el-button
-                    :class="{ 'btn-yellow': isActive === 'news' }"
-                    @click="setActive('news')"
-                    round
-                    size="large"
-                    class="btn-outline-yellow btn-category"
-                    style=""
-                    >News</el-button
-                >
-            </div>
-            <el-row :gutter="40">
-                <el-col
-                    v-for="(news, index) in newsList.slice(0, 2)"
-                    :key="index"
-                    :xs="24"
-                    :sm="12"
-                >
-                    <el-card class="card-news">
-                        <div class="news-cover">
-                            <img @mouseenter="setZoomClass" :src="news?.cover" />
-                        </div>
-                        <div class="news-title">
-                            {{ news?.title }}
-                        </div>
-                        <div style="display: flex; align-items: center; gap: 10px; color: #808080">
-                            <img style="width: 22px" src="@/images/日历.png" alt="" />
-                            <p>{{ news?.add_time }}</p>
-                        </div>
-                        <div class="news-date">{{ news?.date }}</div>
+                    <el-button
+                        :class="{ 'btn-yellow': isActive === 'news' }"
+                        @click="setActive('news')"
+                        round
+                        size="large"
+                        class="btn-outline-yellow btn-category"
+                        style=""
+                        >News</el-button
+                    >
+                </div>
+                <el-row style="margin: 0 auto" gutter="21">
+                    <el-col
+                        v-for="(news, index) in newsList.slice(0, 2)"
+                        :key="index"
+                        :xs="24"
+                        :sm="12"
+                    >
+                        <el-card class="card-news" @click="showPages(news)">
+                            <div class="news-cover">
+                                <img :src="news?.cover" />
+                            </div>
+                            <div class="h">
+                                <div class="news-title">
+                                    {{ news?.title }}
+                                </div>
+                                <div class="hao" style="">
+                                    <img
+                                        style="width: 22px"
+                                        class="hei"
+                                        src="/images/日历.svg"
+                                        alt=""
+                                    />
+                                    <img
+                                        style="width: 22px"
+                                        class="bai"
+                                        src="/images/bai.svg"
+                                        alt=""
+                                    />
+                                    <p>{{ news?.add_time }}</p>
+                                </div>
+                                <div class="news-date">{{ news?.date }}</div>
 
-                        <div
-                            class="news-summary"
-                            style="
-                                font-family: Microsoft YaHei;
-                                font-weight: 400;
-                                font-size: 12px;
-                                color: #4e5976;
-                                line-height: 24px;
-                            "
-                        >
-                            {{ news?.describe }}
-                        </div>
-                        <div class="news-link">
-                            <a href="/index.html#/news" class="aaaa">Read More</a>
-                            <el-icon><Right /></el-icon>
-                        </div>
-                    </el-card>
-                </el-col>
-            </el-row>
-            <div class="news-jump">
-                <el-button
-                    @click="goToPage"
-                    round
-                    class="btn-outline-yellow"
-                    style="width: 152px; height: 43px; background: #e9e9e9; border-radius: 22px"
-                    >See more</el-button
-                >
-            </div>
-        </el-col>
+                                <div
+                                    class="news-summary"
+                                    style="
+                                        font-family: Microsoft YaHei;
+                                        font-weight: 400;
+                                        font-size: 12px;
+                                        color: #4e5976;
+                                        line-height: 24px;
+                                    "
+                                >
+                                    {{ news?.describe }}
+                                </div>
+                                <div class="news-link">
+                                    <a href="javaScript:;" class="aaaa">Read More</a>
+                                    <el-icon><Right /></el-icon>
+                                </div>
+                            </div>
+                        </el-card>
+                    </el-col>
+                </el-row>
+                <div class="news-jump">
+                    <el-button
+                        @click="goToPage"
+                        round
+                        class="btn-outline-yellow"
+                        style="width: 152px; height: 43px; background: #e9e9e9; border-radius: 22px"
+                        >See more</el-button
+                    >
+                </div>
+            </el-col>
+        </div>
     </el-row>
     <el-dialog v-model="applyFormVisible" :show-close="false" align-center>
         <div
@@ -475,6 +496,9 @@ export default {
                     }
                 }, 10)
             }
+        },
+        showPages(item) {
+            this.$router.push(`news/${item.id}`)
         },
         setMouseOut(event) {
             console.log('mouseout', event.target)
@@ -616,11 +640,25 @@ export default {
     justify-content: space-between;
     flex-wrap: wrap;
     gap: 30px;
-    padding: 0 20px;
+    padding: 0 10.5px;
 }
 
 .top {
     margin-top: 112px;
+}
+.xindeee {
+    width: 102px;
+    margin: 0 auto;
+    height: 96px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #ffffff;
+    border-radius: 0 0 51px 51px;
+    img {
+        width: 46px;
+        height: 46px;
+    }
 }
 .banner {
     // position: relative;
@@ -717,6 +755,7 @@ export default {
     padding: 40px 0;
     background-image: url('/images/bg-partners.jpg');
     position: relative;
+    background-size: 100% 100%;
 }
 .partners-title {
     margin-bottom: 46px;
@@ -731,6 +770,11 @@ export default {
     text-align: center;
     font-size: 16px;
 }
+.partners-list {
+    max-width: 1240px;
+
+    margin: 0 auto;
+}
 .partners-list img {
     width: 100%;
     height: auto;
@@ -742,6 +786,7 @@ export default {
     position: relative;
     margin-bottom: 20px;
     overflow: hidden;
+    height: 240px;
     .partners-desc {
         display: block;
         position: absolute;
@@ -749,7 +794,7 @@ export default {
         top: calc(100% - 70px);
         height: 100%;
         text-align: center;
-        font-size: 20px;
+        font-size: 16px;
         color: #ffffff;
         background: linear-gradient(to top, rgba(51, 108, 196, 0.8), rgba(0, 0, 0, 0.1));
         width: 100%;
@@ -764,7 +809,7 @@ export default {
         }
 
         .partners-link {
-            margin-top: 30px;
+            margin-top: 47px;
         }
     }
 
@@ -772,7 +817,7 @@ export default {
         .partners-desc {
             top: 0;
             animation: slideInUp;
-            animation-duration: 2s;
+            animation-duration: 1.2s;
             p {
                 margin-top: 20%;
                 -webkit-line-clamp: 2;
@@ -783,7 +828,7 @@ export default {
         .partners-desc {
             top: calc(100% - 70px);
             animation: slideOutDown;
-            animation-duration: 2s;
+            animation-duration: 1.2s;
         }
     }
 }
@@ -822,7 +867,7 @@ export default {
 }
 
 .choose-us-card {
-    min-height: 320px;
+    height: 230px;
     background: #f7f7f7;
     border-radius: 8px;
     text-align: center;
@@ -830,7 +875,7 @@ export default {
     padding: 0 20px 40px 20px;
     margin-bottom: 40px;
     cursor: pointer;
-    transition: transform 2s;
+    transition: transform 1s;
     &:hover {
         box-shadow:
             0 1px 2px -2px rgba(0, 0, 0, 0.16),
@@ -843,13 +888,13 @@ export default {
     }
 }
 
-.choose-us-card div:first-child {
-    display: inline-block;
-    background-color: #ffffff;
-    padding: 40px;
-    border-bottom-left-radius: 60px;
-    border-bottom-right-radius: 60px;
-}
+// .choose-us-card div:first-child {
+//     display: inline-block;
+//     background-color: #ffffff;
+//     padding: 40px;
+//     border-bottom-left-radius: 60px;
+//     border-bottom-right-radius: 60px;
+// }
 
 .steps {
     background-image: url('/images/bg-steps.jpg');
@@ -872,10 +917,20 @@ export default {
     text-align: center;
     font-size: 16px;
 }
-
+@media (max-width: 1128px) {
+    .xinssdsd {
+        margin: 0 auto;
+    }
+}
 .steps-box {
     max-width: 1240px;
-    margin: 50px auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 30px;
+    padding: 0 10.5px;
+    margin: 120px auto 50px;
 }
 .steps-timeline {
 }
@@ -916,6 +971,36 @@ export default {
     color: #ffffff;
     position: absolute;
     bottom: 30px;
+}
+.hvr-underline-from-left {
+    display: inline-block;
+    vertical-align: middle;
+    -webkit-transform: perspective(1px) translateZ(0);
+    transform: perspective(1px) translateZ(0);
+    box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+    position: relative;
+    overflow: hidden;
+}
+.hvr-underline-from-left:before {
+    content: '';
+    position: absolute;
+    z-index: -1;
+    left: 0;
+    right: 100%;
+    bottom: 0;
+    background: #2098d1;
+    height: 4px;
+    -webkit-transition-property: right;
+    transition-property: right;
+    -webkit-transition-duration: 0.3s;
+    transition-duration: 0.3s;
+    -webkit-transition-timing-function: ease-out;
+    transition-timing-function: ease-out;
+}
+.hvr-underline-from-left:hover:before,
+.hvr-underline-from-left:focus:before,
+.hvr-underline-from-left:active:before {
+    right: 0;
 }
 
 .feedback {
@@ -989,12 +1074,57 @@ export default {
         -webkit-box-orient: vertical;
     }
 }
-
+.node {
+    display: flex;
+    align-items: center;
+}
 .news {
 }
 .card-news {
     margin-bottom: 20px;
     text-align: left;
+    cursor: pointer;
+
+    &:hover {
+        box-shadow: 0 10px 10px -10px rgba(0, 0, 0, 0.5);
+        .news-cover img {
+            transform: scale(1.1);
+        }
+        .news-link {
+            background-color: #ff9300;
+            color: #fff;
+            width: 150px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 10px;
+            a {
+                color: #fff;
+            }
+        }
+    }
+
+    // &:hover {
+    //         background-color: #ff9300;
+
+    //     .h {
+    //         background-color: #ff9300;
+    //         color: #fff;
+    //         .news-title,
+    //         .news-date,
+    //         .news-summary,
+    //         .news-link a,
+    //         .hao {
+    //             color: #fff !important;
+    //         }
+    //         .hei {
+    //             display: none;
+    //         }
+    //         .bai {
+    //             display: block;
+    //         }
+    //     }
+    // }
 }
 
 .news .btn-category {
@@ -1004,13 +1134,59 @@ export default {
     font-size: 24px;
     margin-bottom: 20px;
 }
-
+.hvr-overline-from-left:before {
+    content: '';
+    position: absolute;
+    z-index: -1;
+    left: 0;
+    right: 100%;
+    top: 0;
+    background: #2098d1;
+    height: 4px;
+    -webkit-transition-property: right;
+    transition-property: right;
+    -webkit-transition-duration: 0.3s;
+    transition-duration: 0.3s;
+    -webkit-transition-timing-function: ease-out;
+    transition-timing-function: ease-out;
+}
+.hvr-overline-from-left:hover:before,
+.hvr-overline-from-left:focus:before,
+.hvr-overline-from-left:active:before {
+    right: 0;
+}
+.news-cover {
+    width: 100%;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 .news-cover img {
     width: 100%;
-    &.zoom-in {
-        animation: zoomIn;
-        animation-duration: 3s;
-    }
+    max-width: 556px;
+    max-height: 396px;
+
+    cursor: pointer;
+    -webkit-transition-duration: 0.6s;
+    transition-duration: 0.6s;
+    // &:hover {
+    //     transform: scale(1.1);
+    // }
+    // &.zoom-in {
+    //     animation: zoomIn;
+    //     animation-duration: 3s;
+    // }
+}
+
+.bai {
+    display: none;
+}
+.hao {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #808080;
 }
 .news-title {
     color: #1f2f57;
@@ -1033,7 +1209,7 @@ export default {
     color: #4e5976;
     font-size: 12px;
     height: 72px;
-    margin: 10px 0 20px;
+    margin: 10px 0 0;
     word-break: break-all;
     overflow: hidden;
     display: -webkit-box;
@@ -1044,6 +1220,8 @@ export default {
     color: #1f2f57;
     font-size: 16px;
     margin: 10px 0 20px 0;
+    padding: 10px 0;
+
     * {
         vertical-align: middle;
     }
@@ -1051,7 +1229,7 @@ export default {
         padding-right: 10px;
     }
     a:hover {
-        color: #ff9300;
+        // color: #ff9300;
     }
 }
 .news-jump {

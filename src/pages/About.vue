@@ -236,7 +236,7 @@ export default {
     align-items: center;
     flex-direction: column;
     line-height: 30px;
-    font-weight: bold;
+
     padding: 30px 0;
     border-top: 2px solid #ebebeb;
     color: #030303;

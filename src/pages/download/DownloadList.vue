@@ -13,7 +13,7 @@
                         :sm="6"
                         :md="8"
                     >
-                        <div class="download-item card-noborder">
+                        <div class="download-item card-noborder" @click="dowloadfile(download.url)">
                             <div class="icon-download">
                                 <img src="@/images/icon-download.png" />
                             </div>
@@ -23,13 +23,7 @@
                                 <!--              University of New Zealand!-->
                             </div>
                             <div class="text-center">
-                                <el-button
-                                    @click="dowloadfile(download.url)"
-                                    class="btn-lightgray"
-                                    round
-                                >
-                                    download
-                                </el-button>
+                                <el-button class="btn-lightgray" round> download </el-button>
                             </div>
                         </div>
                     </el-col>
@@ -187,6 +181,14 @@ export default {
     position: relative;
     padding: 60px 40px 20px 40px;
     margin-bottom: 20px;
+    cursor: pointer;
+    &:hover {
+        .btn-lightgray {
+            color: #ffffff;
+            border-color: #ff9300;
+            background-color: #ff9300;
+        }
+    }
     .icon-download {
         position: absolute;
         left: 0;

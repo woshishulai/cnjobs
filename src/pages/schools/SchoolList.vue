@@ -1,6 +1,6 @@
 <template>
     <div class="wrap">
-        <el-row class="text-primary" style="width: 1300px; margin: 0 auto">
+        <el-row class="text-primary" style="max-width: 1300px; padding: 0 10px; margin: 0 auto">
             <el-col :span="24">
                 <breadcrumb :breadcrumbs="breadcrumbs" />
                 <div class="search-form sss">
@@ -65,6 +65,7 @@
                         v-for="(school, index) in schools"
                         :key="index"
                         class="school-list-item card-noborder"
+                        @click="toDetial(school.id)"
                     >
                         <el-row>
                             <el-col :xs="24" :sm="6" :md="6">
@@ -72,21 +73,14 @@
                                 <!--              <img class="school-cover" src="@/images/school1.jpg" />-->
                             </el-col>
                             <el-col class="school-baseinfo" :xs="24" :sm="12" :md="14">
-                                <div>School name:</div>
                                 <p>{{ school.school_name }}</p>
-                                <div>School type:</div>
+
                                 <p>{{ school.type_name }}</p>
-                                <div>Address:</div>
-                                <p>{{ school.school_address }}</p>
+
+                                <p>{{ school.province }}{{ school.city }}</p>
                             </el-col>
                             <el-col :xs="24" :sm="6" :md="4">
-                                <el-button
-                                    @click="toDetial(school.id)"
-                                    type="primary"
-                                    class="btn-lightblue"
-                                >
-                                    MORE
-                                </el-button>
+                                <el-button type="primary" class="btn-lightblue"> MORE </el-button>
                             </el-col>
                         </el-row>
                     </div>
@@ -254,6 +248,10 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.card-noborder {
+    padding: 20px 0;
+    background-color: transparent;
+}
 .wrap {
     background-color: #f8f9fa;
     margin-top: 112px;
@@ -292,7 +290,17 @@ export default {
     }
 }
 .school-list-item {
+    background-color: #fff;
     margin: 40px 0;
+    cursor: pointer;
+    &:hover {
+        box-shadow: 0 10px 10px -10px rgba(0, 0, 0, 0.5);
+        .btn-lightblue {
+            color: #ffffff;
+            border-color: #ff9300;
+            background-color: #ff9300;
+        }
+    }
     :deep(.el-col) {
         display: flex;
         align-items: center;

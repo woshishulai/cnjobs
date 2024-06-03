@@ -78,19 +78,23 @@
                             </div>
                             <div class="job-body">
                                 <div class="job-body-left">
-                                    <div>
-                                        <img class="job-location" src="/images/icon-position.png" />
+                                    <div style="display: flex; align-items: center; gap: 11px">
+                                        <i class="iconfont icon-qian"></i>
+                                        <span class="job-date">Start in {{ job.salary }}</span>
+                                    </div>
+                                    <div style="display: flex; align-items: center; gap: 5px">
+                                        <i class="iconfont icon-chakantiezidingwei"></i>
                                         <span class="job-city">{{ job.city }}</span>
                                         <span class="job-province">{{ job.province }}</span>
                                     </div>
-                                    <div>
-                                        <img class="job-watch" src="/images/icon-watch.png" />
+                                    <div style="display: flex; align-items: center; gap: 5px">
+                                        <i class="iconfont icon-time"></i>
                                         <span class="job-date">Start in {{ job.startDate }}</span>
                                     </div>
                                 </div>
                                 <div class="job-body-right">
                                     <div>{{ job.position }} position available</div>
-                                    <div>{{ job.salary }}</div>
+
                                     <router-link class="btn-apply" :to="'/jobs/' + job.id">
                                         Apply</router-link
                                     >
@@ -275,7 +279,7 @@ export default {
         div,
         input,
         select {
-            background-color: #eff1f3;
+            // background-color: #eff1f3;
             border-radius: 8px;
             height: 50px;
             color: #474747;
@@ -290,6 +294,10 @@ export default {
 }
 .cnjob-card {
     border-radius: 8px;
+    cursor: pointer;
+    &:hover {
+        box-shadow: 0 10px 10px -10px rgba(0, 0, 0, 0.5);
+    }
 }
 .niao {
     margin-top: 50px;
@@ -301,7 +309,7 @@ export default {
     }
 
     .job-title {
-        padding: 20px 0 20px 20px;
+        padding: 20px 0 20px 33px;
         border-bottom: 1px solid #f6f7f8;
         color: #1f2f57;
         font-size: 18px;
@@ -334,10 +342,19 @@ export default {
             vertical-align: middle;
         }
 
-        padding: 10px;
+        padding: 10px 31px;
         display: flex;
         justify-content: space-between;
         align-items: center;
+        &:hover {
+            .job-body-right {
+                .btn-apply {
+                    color: #ffffff;
+                    border-color: #ff9300;
+                    background-color: #ff9300;
+                }
+            }
+        }
 
         .job-body-left {
             padding: 10px;
@@ -346,7 +363,7 @@ export default {
 
             img {
                 width: 16px;
-                height: 16px;
+
                 display: inline-block;
                 margin-right: 10px;
             }
@@ -368,11 +385,11 @@ export default {
                 color: #1f2f57;
                 background-color: #e1eef5;
 
-                &:hover {
-                    color: #ffffff;
-                    border-color: #ff9300;
-                    background-color: #ff9300;
-                }
+                // &:hover {
+                //     color: #ffffff;
+                //     border-color: #ff9300;
+                //     background-color: #ff9300;
+                // }
             }
         }
     }

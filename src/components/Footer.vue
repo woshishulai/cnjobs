@@ -113,10 +113,6 @@ export default {
 .school-logos {
     padding: 40px 0;
     background-color: #ffffff;
-    img {
-        width: 200px;
-        height: 40px;
-    }
 }
 .swiper-item {
     width: 1200px;
@@ -124,12 +120,13 @@ export default {
     display: flex;
     justify-content: space-around;
     img {
-        width: 150px;
+        max-width: 150px;
+        max-height: 40px;
         cursor: pointer;
     }
 }
 .text-left {
-    width: 1200px;
+    max-width: 1146px;
     margin: 16px auto;
 }
 .footers {

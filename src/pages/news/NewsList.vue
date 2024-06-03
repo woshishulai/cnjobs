@@ -34,9 +34,9 @@
                         :sm="12"
                         :md="8"
                     >
-                        <div class="news-card">
+                        <div class="news-card" @click="$router.push('/news/' + news.id)">
                             <div class="news-card-cover">
-                                <img :src="news.cover" />
+                                <img style="width: 100%; height: 100%" :src="news.cover" />
                                 <div class="news-img-cover"></div>
                             </div>
                             <div class="news-card-title">
@@ -186,12 +186,20 @@ export default {
 .news-card {
     margin-bottom: 40px;
     position: relative;
+
     .news-card-cover {
         text-align: center;
         position: relative;
+        overflow: hidden;
+        &:hover {
+            img {
+                transform: scale(1.1);
+            }
+        }
         img {
+            -webkit-transition-duration: 0.6s;
+            transition-duration: 0.6s;
             width: 100%;
-            max-width: 500px;
         }
         .news-img-cover {
             position: absolute;
@@ -222,7 +230,8 @@ export default {
         }
         .news-title {
             font-weight: 400;
-            font-size: 20px;
+            font-size: 14px;
+            line-height: 16px;
             color: #010101;
             margin: 10px 0;
         }
@@ -236,6 +245,7 @@ export default {
                 align-items: center;
                 gap: 8px;
                 color: #474747;
+                font-size: 12px;
             }
         }
         .news-time {
